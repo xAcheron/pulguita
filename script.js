@@ -27,8 +27,10 @@ document.addEventListener('DOMContentLoaded', () => {
         mainContent.style.opacity = '1';
       }, 50);
       
-      // Intentar reproducir música automáticamente tras la interacción del usuario
-      playMusic();
+      // Intentar reproducir música automáticamente tras la interacción del usuario si el elemento existe
+      if (bgMusic) {
+        playMusic();
+      }
     }, 800);
   });
 
@@ -36,24 +38,28 @@ document.addEventListener('DOMContentLoaded', () => {
   let isPlaying = false;
 
   function playMusic() {
+    if (!bgMusic) return;
     bgMusic.play().then(() => {
       isPlaying = true;
-      btnMusic.textContent = 'Pause';
+      if (btnMusic) btnMusic.textContent = 'Pause';
     }).catch(err => {
       console.log("El navegador bloqueó la reproducción automática inicial:", err);
     });
   }
 
-  btnMusic.addEventListener('click', () => {
-    if (isPlaying) {
-      bgMusic.pause();
-      btnMusic.textContent = 'Play';
-    } else {
-      bgMusic.play();
-      btnMusic.textContent = 'Pause';
-    }
-    isPlaying = !isPlaying;
-  });
+  if (btnMusic) {
+    btnMusic.addEventListener('click', () => {
+      if (!bgMusic) return;
+      if (isPlaying) {
+        bgMusic.pause();
+        btnMusic.textContent = 'Play';
+      } else {
+        bgMusic.play();
+        btnMusic.textContent = 'Pause';
+      }
+      isPlaying = !isPlaying;
+    });
+  }
 
   // --- 3. Sistema de Partículas de Corazón (Canvas) ---
   const canvas = document.getElementById('particlesCanvas');
