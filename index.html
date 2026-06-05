@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Para Karina, con todo mi amor 💖</title>
+  <!-- Google Fonts para tipografías premium -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Canvas para partículas flotantes de fondo -->
+  <canvas id="particlesCanvas"></canvas>
+
+  <!-- Pantalla de Bienvenida (Intro Screen) -->
+  <div id="intro-screen" class="glass-panel">
+    <div class="intro-content">
+      <div class="heart-pulse-icon">💝</div>
+      <h1 class="romantic-title-large">Hola Amorcito mio de mi 💖...</h1>
+      <p class="romantic-subtitle">He preparado un detalle muy especial para ti. ¿Quieres verlo?</p>
+      <button id="btn-start" class="btn-primary">Abrir uwu ✨</button>
+    </div>
+  </div>
+
+  <!-- Contenedor Principal (Oculto al inicio) -->
+  <div id="main-content" class="hidden">
+    <!-- Encabezado Romántico -->
+    <header class="main-header">
+      <h1 class="dancing-title">Para la niña más hermosota del mundo mundial 🌸</h1>
+      <p class="header-dedication">Un pequeño espacio digital dedicado a ti, mi preciosa.</p>
+    </header>
+
+    <!-- Reproductor de Música Premium (Opcional - controlable por el usuario) -->
+    <div class="music-player glass-panel-small">
+      <span class="music-icon">🎵</span>
+      <span class="music-text">Melodía Romántica</span>
+      <button id="btn-music" class="btn-music-toggle">Play</button>
+      <audio id="bg-music" loop>
+        <!-- Fuente de audio de fondo (libre de derechos o personalizable) -->
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+
+    <!-- Sección 1: El sobre y la carta de amor 3D -->
+    <section class="section-container">
+      <div class="envelope-wrapper">
+        <div class="envelope" id="envelope">
+          <div class="envelope-front"></div>
+          <div class="envelope-top"></div>
+          <div class="letter">
+            <div class="letter-text">
+              <h2 class="letter-title">Mi amor...</h2>
+              <p>Karina, quería hacerte un detalle diferente, algo que puedas ver siempre que quieras recordar lo especial que eres para mí.</p>
+              <p>Gracias por cada sonrisa, por tu paciencia, por tu cariño y por hacer que cada día sea más bonito a tu lado. Eres todo lo que mi corazon quiere y necesita. TE AMO💖</p>
+              <p class="letter-signature">Mi alma es tuya, siempre. ❤️</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="instruction-text">Haz clic en el sobrecito :P ✉️</p>
+    </section>
+
+    <!-- Sección 2: Razones por las que te amo (Tarjetas Interactivas) -->
+    <section class="section-container">
+      <h2 class="section-title">Algunas razones de por qué te amo... ✨</h2>
+      <div class="cards-grid">
+        <div class="reason-card glass-panel-card" data-tilt>
+          <div class="card-icon">😊</div>
+          <h3>Tu sonrisa</h3>
+          <p>Porque tienes la capacidad de iluminar hasta mi día más gris con tan solo sonreír.</p>
+        </div>
+        <div class="reason-card glass-panel-card" data-tilt>
+          <div class="card-icon">🧠</div>
+          <h3>Tu inteligencia</h3>
+          <p>Admiro mucho tu dedicación, lo brillante que eres y tu forma de ver el mundo.</p>
+        </div>
+        <div class="reason-card glass-panel-card" data-tilt>
+          <div class="card-icon">🤗</div>
+          <h3>Tu apoyo</h3>
+          <p>Porque siempre estás ahí para mí, dándome paz, aliento y tus abrazos confortantes.</p>
+        </div>
+        <div class="reason-card glass-panel-card" data-tilt>
+          <div class="card-icon">✨</div>
+          <h3>Tu forma de ser</h3>
+          <p>Única, bondadosa, graciosa y con ese gran corazón que me enamora cada día más.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sección 3: La Pregunta Especial (Juego Evasivo) -->
+    <section class="section-container question-section glass-panel">
+      <h2 class="romantic-title">Una última pregunta... 🤭</h2>
+      <p class="question-text">¿Si te vas a casar conmigo?</p>
+      
+      <div class="buttons-container">
+        <button id="btn-yes" class="btn-primary btn-interactive">¡SÍ! 💖</button>
+        <button id="btn-no" class="btn-secondary btn-interactive">No 😢</button>
+      </div>
+    </section>
+  </div>
+
+  <!-- Modal de Aceptación (Confeti y mensaje feliz) -->
+  <div id="happy-modal" class="modal hidden">
+    <div class="modal-content glass-panel">
+      <div class="modal-heart">💖</div>
+      <h2>¡Ya lo sabia 😎! 🥰</h2>
+      <p>Gracias por ser mi mayor felicidad. Eres la mejor novia del mundo mundial. ¡Te amo muchísimo, Pulguita! 💕</p>
+      <button id="btn-close-modal" class="btn-primary">Cerrar con una sonrisa 😊</button>
+    </div>
+  </div>
+
+  <!-- Efecto Confeti (Canvas-confetti CDN o similar, implementado en vanilla JS) -->
+  <script src="script.js"></script>
+</body>
+</html>

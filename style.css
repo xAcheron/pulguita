@@ -1,0 +1,587 @@
+/* Variables globales de diseño */
+:root {
+  --primary-color: #ff758c;
+  --primary-glow: rgba(255, 117, 140, 0.4);
+  --secondary-color: #ff7eb3;
+  --bg-gradient-start: #0f0a1c;
+  --bg-gradient-end: #05020a;
+  --glass-bg: rgba(255, 255, 255, 0.05);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --text-primary: #ffffff;
+  --text-secondary: #f0c6d4;
+  --envelope-bg: #ff6b8b;
+  --envelope-flap: #e65c7b;
+  --envelope-inside: #d44d6c;
+  --letter-bg: #fffbf0;
+  --letter-text-color: #2b1e22;
+}
+
+/* Reset y estilos base */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+  color: var(--text-primary);
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Canvas para las partículas flotantes */
+#particlesCanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Panel Glassmorphism Común */
+.glass-panel {
+  background: var(--glass-bg);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid var(--glass-border);
+  border-radius: 24px;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+}
+
+.glass-panel-small {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+}
+
+/* Pantalla de Introducción */
+#intro-screen {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 500px;
+  padding: 40px;
+  text-align: center;
+  z-index: 10;
+  transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+
+.intro-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.heart-pulse-icon {
+  font-size: 70px;
+  animation: pulse 1.8s infinite;
+  filter: drop-shadow(0 0 15px var(--primary-color));
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+
+.romantic-title-large {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.8rem;
+  background: linear-gradient(to right, #ffffff, var(--text-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 10px;
+}
+
+.romantic-subtitle {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  line-height: 1.6;
+  font-weight: 300;
+}
+
+/* Botones Premium */
+.btn-primary {
+  background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+  color: #fff;
+  border: none;
+  padding: 14px 32px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0 4px 15px var(--primary-glow);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
+  z-index: 2;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 117, 140, 0.6);
+  filter: brightness(1.05);
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-secondary);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 14px 32px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-2px);
+}
+
+/* Contenido Principal */
+#main-content {
+  position: relative;
+  z-index: 5;
+  width: 90%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+  opacity: 1;
+  transition: opacity 1s ease;
+}
+
+.hidden {
+  display: none !important;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Encabezado */
+.main-header {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.dancing-title {
+  font-family: 'Dancing Script', cursive;
+  font-size: 4rem;
+  background: linear-gradient(45deg, #ff758c, #ff7eb3, #ffecd2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 10px;
+  filter: drop-shadow(0 2px 10px rgba(0,0,0,0.3));
+}
+
+.header-dedication {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  font-weight: 300;
+}
+
+/* Reproductor de Música */
+.music-player {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 100;
+  padding: 10px 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.85rem;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+
+.music-icon {
+  animation: spin 3s linear infinite;
+}
+
+@keyframes spin {
+  100% { transform: rotate(360deg); }
+}
+
+.btn-music-toggle {
+  background: var(--primary-color);
+  border: none;
+  color: white;
+  padding: 4px 10px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.75rem;
+}
+
+/* Contenedores de Sección */
+.section-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
+  width: 100%;
+}
+
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 10px;
+  background: linear-gradient(to right, #fff, var(--text-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* El Sobre 3D Interactiva */
+.envelope-wrapper {
+  height: 380px;
+  width: 100%;
+  max-width: 450px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.envelope {
+  position: relative;
+  width: 380px;
+  height: 250px;
+  background-color: var(--envelope-inside);
+  border-radius: 0 0 8px 8px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+  transform-style: preserve-3d;
+  transition: transform 0.5s ease;
+}
+
+/* Flap superior del sobre */
+.envelope-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-left: 190px solid transparent;
+  border-right: 190px solid transparent;
+  border-top: 130px solid var(--envelope-flap);
+  transform-origin: top;
+  z-index: 4;
+  transition: transform 0.5s ease 0.2s, z-index 0.2s ease 0.4s;
+}
+
+/* Frontal del sobre (lados y fondo) */
+.envelope-front {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-left: 190px solid var(--envelope-bg);
+  border-right: 190px solid var(--envelope-bg);
+  border-bottom: 125px solid var(--envelope-bg);
+  z-index: 5;
+  border-radius: 0 0 8px 8px;
+}
+
+.envelope::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-left: 190px solid transparent;
+  border-right: 190px solid transparent;
+  border-bottom: 125px solid var(--envelope-inside);
+  z-index: 3;
+}
+
+/* La Carta física dentro */
+.letter {
+  position: absolute;
+  bottom: 10px;
+  left: 15px;
+  width: 350px;
+  height: 230px;
+  background-color: var(--letter-bg);
+  border-radius: 8px;
+  z-index: 2;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  padding: 24px;
+  transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.4s, z-index 0.2s ease 0.4s;
+  overflow: hidden;
+}
+
+.letter-text {
+  font-family: 'Playfair Display', serif;
+  color: var(--letter-text-color);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.letter-title {
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.8rem;
+  color: var(--envelope-bg);
+  margin-bottom: 4px;
+}
+
+.letter-signature {
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.4rem;
+  text-align: right;
+  color: var(--envelope-bg);
+  margin-top: auto;
+}
+
+/* Animaciones al abrir el sobre */
+.envelope.open .envelope-top {
+  transform: rotateX(180deg);
+  z-index: 1;
+}
+
+.envelope.open .letter {
+  transform: translateY(-190px);
+  z-index: 6;
+  height: 320px; /* Se estira al salir */
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+}
+
+.instruction-text {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+/* Grid de Razones */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 24px;
+  width: 100%;
+}
+
+.reason-card {
+  padding: 30px 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease, border-color 0.4s ease;
+  cursor: default;
+}
+
+.reason-card:hover {
+  transform: translateY(-8px) scale(1.03);
+  border-color: rgba(255, 117, 140, 0.4);
+  box-shadow: 0 10px 25px rgba(255, 117, 140, 0.15);
+}
+
+.card-icon {
+  font-size: 40px;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
+}
+
+.reason-card h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.reason-card p {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  font-weight: 300;
+}
+
+/* Sección Pregunta Especial */
+.question-section {
+  padding: 50px 30px;
+  text-align: center;
+  width: 100%;
+  max-width: 650px;
+  margin: 0 auto;
+  position: relative; /* Clave para el movimiento absoluto del botón No */
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 30px;
+}
+
+.romantic-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.2rem;
+}
+
+.question-text {
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+}
+
+.buttons-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  margin-top: 10px;
+  position: relative;
+  width: 100%;
+  height: 60px; /* Contenedor con altura fija para los botones */
+}
+
+/* Botón interactivo "No" (posicionable de manera flexible) */
+#btn-no {
+  transition: transform 0.1s ease-out, background 0.3s ease;
+}
+
+/* Modal de Éxito */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 200;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(5, 2, 10, 0.85);
+  backdrop-filter: blur(10px);
+  padding: 20px;
+  transition: opacity 0.5s ease;
+}
+
+.modal-content {
+  max-width: 500px;
+  width: 100%;
+  padding: 40px 30px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  animation: modalIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes modalIn {
+  from {
+    transform: scale(0.85);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.modal-heart {
+  font-size: 80px;
+  animation: beat 1s infinite alternate;
+  filter: drop-shadow(0 0 20px var(--primary-color));
+}
+
+@keyframes beat {
+  to { transform: scale(1.2); }
+}
+
+.modal h2 {
+  font-family: 'Dancing Script', cursive;
+  font-size: 2.8rem;
+  color: var(--primary-color);
+}
+
+.modal p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #fff;
+  font-weight: 300;
+}
+
+/* Media Queries (Responsividad) */
+@media (max-width: 480px) {
+  .dancing-title {
+    font-size: 2.8rem;
+  }
+
+  .romantic-title-large {
+    font-size: 2.2rem;
+  }
+
+  .envelope-wrapper {
+    height: 330px;
+  }
+
+  .envelope {
+    width: 320px;
+    height: 210px;
+  }
+
+  .envelope-top {
+    border-left-width: 160px;
+    border-right-width: 160px;
+    border-top-width: 110px;
+  }
+
+  .envelope-front {
+    border-left-width: 160px;
+    border-right-width: 160px;
+    border-bottom-width: 105px;
+  }
+
+  .envelope::before {
+    border-left-width: 160px;
+    border-right-width: 160px;
+    border-bottom-width: 105px;
+  }
+
+  .letter {
+    width: 290px;
+    height: 190px;
+    padding: 16px;
+  }
+
+  .letter-text {
+    font-size: 0.85rem;
+    gap: 8px;
+  }
+
+  .letter-title {
+    font-size: 1.4rem;
+  }
+
+  .envelope.open .letter {
+    transform: translateY(-160px);
+    height: 280px;
+  }
+  
+  .buttons-container {
+    flex-direction: column;
+    gap: 15px;
+    height: auto;
+    min-height: 120px;
+  }
+  
+  #btn-no {
+    position: relative; /* En móviles a veces es mejor mantenerlo presionable o dejar que se mueva en base a la pantalla */
+  }
+}
